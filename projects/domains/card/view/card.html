@@ -1,0 +1,6 @@
+@let _card = card();
+<div class="card"  [appHighlight]="'red'">
+    <h1> {{_card?.title | capPipe }}</h1>
+    <p>{{_card?.body}}</p>
+    <button (click)="selectedModel(_card?.id)">Close</button>
+</div>

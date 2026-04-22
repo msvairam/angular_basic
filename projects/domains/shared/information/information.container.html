@@ -1,0 +1,12 @@
+<h1>Information Container</h1>
+<ng-content />
+<p>{{ message() }}</p>
+
+<form>
+    <input appConvertToInt [formField]="userForm.email" type="email">
+
+    @if (userForm.email().touched() && userForm.email().invalid()) {
+        <span>{{ userForm.email().errors()[0].message}}</span>
+    }
+</form>
+<!-- <img ngSrc="assets/img/car.jpg" alt="car">-->

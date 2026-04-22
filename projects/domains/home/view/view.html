@@ -1,0 +1,10 @@
+<app-header>
+    <h1> Modern Web Application</h1>
+</app-header>
+<h2> Home Page </h2>
+<button (click)="changeFooterMessage()"></button>
+<custom-slider></custom-slider>
+<app-footer>
+    <information-view [message]="message()" />
+    <h3 ngProjectAs="owner"> By Vairamuthu </h3>
+</app-footer>

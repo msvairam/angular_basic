@@ -1,0 +1,61 @@
+<div class="basic-container">
+    <ng-content />
+    <h1> Directive</h1>
+    <label for="showSad"><input type="checkbox" id="showSad" checked (change)="showSad = !showSad"></label>
+    <p>{{showSad}}</p>
+    <select [(ngModel)]="hero">
+        @for (h of heroes; track h.name) {
+           @if(showSad || h.emotion !== 'sad') {
+              <option [ngValue]="h">
+               <custom-list-box [value]="h.name" [disable]="false">
+                     <p >{{showSad}}{{h.name}} {{h.emotion}}</p>
+                </custom-list-box>
+                </option>
+           }
+        }
+    </select>
+       @for (h of heroes; track h.name) {
+           @if(showSad || h.emotion !== 'sad') {
+               <custom-list-box [value]="h.name" [disable]="false">
+                     <p >{{showSad}}{{h.name}} {{h.emotion}}</p>
+                </custom-list-box>
+           }
+        }
+</div>
+<input type="radio" name="colors" (change)="color = 'Yellow'">Yellow
+<input type="radio" name="colors" (change)="color = 'red'">Red
+<input type="radio" name="colors" (change)="color = 'blue'">Blue
+
+<p [appHighlight]="color" defaultColor="black" (changeModel)="selectedCard()"> HightlightMe</p>
+<p ngNonBindable>{{1 + 1}}</p>
+<ng-template select let-data [selectFrom]="heroes">
+       @for (h of data; track h.name) {
+           @if(showSad || h.emotion !== 'sad') {
+              <option [ngValue]="h">{{showSad}}{{h.name}} {{h.emotion}}</option>
+               
+           }
+        }
+</ng-template>
+
+<ng-template [nxUnless]="showSad">
+    <p>No sad heroes available.</p>
+</ng-template>
+<button (click)="resetSelectedCard()" >Reset Selected Card</button>
+<div class="main-container">
+    @let _cardData = cardResource;
+    @let _cards = cards();
+    @if(!_cardData.error() && _cardData.isLoading()) {
+        <p>Loading...</p>
+    } @else if(_cards.length) {
+        @for(card of _cards; track card.id) {
+            <card [card]="card" [id]="card.id" (closed)="menuClosed()" [(clickedCard)]="selectedCard"/>
+        }
+    }
+</div>
+<div style="height:1200px"></div>
+@defer(on viewport) {
+    <div #informationContainer >
+         </div>
+} @placeholder {
+    <p>Loading...</p>
+}
