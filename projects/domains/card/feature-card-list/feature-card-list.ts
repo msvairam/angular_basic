@@ -8,10 +8,12 @@ import { HightLightDirective } from '../../../lib-common/directives/highlights';
 import { SelectDirective } from '../../../lib-common/directives/select';
 import { nxUnlessDirective } from '../../../lib-common/directives/nxunless';
 import { CustomListBox } from '../../../lib-view/custom-list-box/custom-list-box';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'feature-card-list',
-    imports: [ CardView, FormsModule, CommonModule, HightLightDirective,  SelectDirective, nxUnlessDirective, CustomListBox ],
+    imports: [ CardView, FormsModule, CommonModule, HightLightDirective,  
+        SelectDirective, nxUnlessDirective, CustomListBox, RouterOutlet ],
     providers: [CardList],
     templateUrl: './feature-card-list.html',
     styleUrl: './feature-card-list.css',
