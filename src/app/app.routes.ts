@@ -5,12 +5,25 @@ const titleResolver: ResolveFn<string> = (route) => route.queryParams['id'];
 
 export const routes: Routes = [
     {
+        path: '',
+        redirectTo: (ActivatedRouteSnapshot) => {
+            const id = ActivatedRouteSnapshot.queryParams['id'];
+            console.log("id",id)
+            return `routing/usecase1/${id}/review`;
+        },
+        pathMatch: 'full',
+    },
+    {
+        path: 'http-client',
+        loadComponent: () => import('../../projects/domains/http-client/http-client-case').then((m) => m.HttpClientCase),
+    },
+    {
         path: 'program-render',
         loadComponent: () => import('../../projects/domains/program-render/program-render').then((m => m.ProgramRender)),
         title: 'Program Render',
     },
     {
-        path: '',
+        path: 'home',
         loadComponent: () => import('../../projects/domains/home/view/view').then((m => m.Home)),
         title: 'Home',
        
@@ -29,9 +42,8 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'product/:id',
-        loadComponent: () => import('../../projects/domains/routing/overview/usecase1/product').then((m) => m.Product),
-        loadChildren: () => import('../../projects/domains/routing/overview/usecase1/product.routing').then((m) => m.productRoutes);
+        path: 'routing',
+        loadChildren: () => import('../../projects/domains/routing/routing.route').then((m) => m.RoutingRoutes),
     },
     {
         path: '**',
