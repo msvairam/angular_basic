@@ -1,7 +1,7 @@
 import { Component, computed, effect, inject, resource, signal } from '@angular/core';
 import { PostData } from '../post.data'
 import { rxResource } from '@angular/core/rxjs-interop';
-import { catchError, of, throwError } from 'rxjs';
+import { catchError, of, throwError, firstValueFrom } from 'rxjs';
 
 @Component({
     selector: 'app-post',
@@ -12,8 +12,8 @@ import { catchError, of, throwError } from 'rxjs';
             <p>{{val.id}}</p>
         }
     }
-    @else if (postResource.error()) {
-        <i>Loading Error:  {{ postResource.error()?.message }}</i>
+    @else if (postResource.error(); as err) {
+        <i>Loading Error:  {{ err.message }}</i>
     }
     <p>Reload<p>
         <button (click)="postResource.reload()">Reload</button>
@@ -22,6 +22,13 @@ import { catchError, of, throwError } from 'rxjs';
 export class Post {
     readonly postData = inject(PostData);
     readonly userid = signal(1);
+
+    readonly postRx = resource({
+        params: () => ({ id: this.userid()}),
+        loader:({params: {id}}) => {
+            return firstValueFrom(this.postData.getPostByParams({id}))
+        }
+    })
 
     readonly postResource = rxResource({
         params: () => ({ id: this.userid() }),

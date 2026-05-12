@@ -4,7 +4,7 @@ import { NgControl } from '@angular/forms';
 @Directive({
     selector: '[appConvertToInt]',
     host: {
-        '(mouseout)': 'onConvertToInt()',
+        '(mouseleave)': 'onConvertToInt()',
     }
 })
 export class ConvertToInt {

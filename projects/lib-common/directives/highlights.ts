@@ -3,7 +3,7 @@ import { Directive, input, signal, ElementRef, inject, model } from "@angular/co
 @Directive({
     selector: '[appHighlight]',
     host: {
-        '(mouseenter)': 'changeBackgroundColor( this.appHighlight() || this.defaultColor())',
+        '(mouseenter)': 'changeBackgroundColor(this.appHighlight() || this.defaultColor())',
         '(mouseleave)': 'changeBackgroundColor(null)',
     }
 })

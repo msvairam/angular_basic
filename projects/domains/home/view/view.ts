@@ -16,8 +16,6 @@ export class Home {
 
     private readonly footer = viewChild.required(Footer);
 
-
-
     protected changeFooterMessage() {
         console.log(this.footer().message);
     

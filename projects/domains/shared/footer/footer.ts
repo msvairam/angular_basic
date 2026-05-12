@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, contentChild, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, contentChild } from '@angular/core';
 import { InformationView } from '../information/information-container';
 
 @Component({

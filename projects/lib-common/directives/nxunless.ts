@@ -1,30 +1,31 @@
-import { Directive, input, inject, TemplateRef, ViewContainerRef, effect, HostListener, booleanAttribute } from '@angular/core';
-import { TitleStrategy } from '@angular/router';
+import { booleanAttribute, Directive, input, TemplateRef, inject, ViewContainerRef, effect } from '@angular/core';
 
 @Directive({
     selector: '[nxUnless]',
     host: {
-        '(click)': 'showMessage()'
+        '(click)': 'showMesssage()',
     }
+
 })
 export class nxUnlessDirective {
-    public readonly nxUnless = input.required({transform: booleanAttribute})
+    public readonly nxUnless = input.required({transform:  booleanAttribute});
 
-    private readonly templateRef = inject(TemplateRef);
+    private readonly templateRef =  inject(TemplateRef);
     private readonly viewContainerRef = inject(ViewContainerRef);
 
-    protected showMessage() {
-        console.log('test');
+    showMesssage() {
+        console.log('show message')
     }
 
     constructor() {
         effect(() => {
             const visible = this.nxUnless();
+
             if(visible) {
                 this.viewContainerRef.createEmbeddedView(this.templateRef);
             } else if(!visible) {
                 this.viewContainerRef.clear();
             }
-        }) 
+        })
     }
 }

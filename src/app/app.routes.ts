@@ -3,6 +3,8 @@ import { authGuard } from '../../projects/lib-common/guards/auth.guard';
 
 const titleResolver: ResolveFn<string> = (route) => route.queryParams['id'];
 
+const dataResolver: ResolveFn<string> = () => 'testing'
+
 export const routes: Routes = [
     {
         path: '',
@@ -12,6 +14,10 @@ export const routes: Routes = [
             return `routing/usecase1/${id}/review`;
         },
         pathMatch: 'full',
+    },
+    {
+        path: 'form-concept',
+        loadComponent: () => import('../../projects/domains/form-concept/form-concept').then(m => m.FormConcept),
     },
     {
         path: 'http-client',
@@ -33,6 +39,7 @@ export const routes: Routes = [
         canActivate: [authGuard],
         loadComponent: () => import('@feature-card/feature-card-list').then((m => m.FeatureCardList)),
         title: titleResolver,
+        resolve: dataResolver,
         data: { feature: 'card'},
          children: [
             {
