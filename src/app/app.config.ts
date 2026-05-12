@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, ApplicationConfig, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, ErrorHandler, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter, TitleStrategy, withComponentInputBinding, withRouterConfig } from '@angular/router';
 import { AppTitleStrategy } from '../../projects/lib-common/strategy/title.strategy';
 
@@ -6,6 +6,7 @@ import { routes } from './app.routes';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 
 import { httpInterceptor } from '../../projects/lib-common/interceptor/auth.interceptor';
+import { GlobalErrorHandler } from '../../projects/lib-common/service/global-error-handler';
 
 const loadConfig = () => {
   return () => console.log('Before Loading');
@@ -13,10 +14,13 @@ const loadConfig = () => {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler,
+    },
     provideAppInitializer(() => {
       return console.log('app Initializer');
-    }
-    ),
+    }),
     provideHttpClient(
       withFetch(),
       withInterceptors([httpInterceptor])
