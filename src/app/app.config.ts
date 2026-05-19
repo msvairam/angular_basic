@@ -5,7 +5,8 @@ import { AppTitleStrategy } from '../../projects/lib-common/strategy/title.strat
 import { routes } from './app.routes';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 
-import { httpInterceptor } from '../../projects/lib-common/interceptor/auth.interceptor';
+import { AuthInterceptor } from '../../projects/lib-common/interceptor/auth.interceptor';
+import { ErrorInterceptor } from '../../projects/lib-common/interceptor/error.incerceptor';
 import { GlobalErrorHandler } from '../../projects/lib-common/service/global-error-handler';
 
 const loadConfig = () => {
@@ -23,7 +24,7 @@ export const appConfig: ApplicationConfig = {
     }),
     provideHttpClient(
       withFetch(),
-      withInterceptors([httpInterceptor])
+      withInterceptors([AuthInterceptor, ErrorInterceptor])
     ),
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, 
