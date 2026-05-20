@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, isActive, Router, RouterOutlet } from '@angular/router';
+import { isActive, Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',

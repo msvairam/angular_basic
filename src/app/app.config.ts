@@ -9,10 +9,6 @@ import { AuthInterceptor } from '../../projects/lib-common/interceptor/auth.inte
 import { ErrorInterceptor } from '../../projects/lib-common/interceptor/error.incerceptor';
 import { GlobalErrorHandler } from '../../projects/lib-common/service/global-error-handler';
 
-const loadConfig = () => {
-  return () => console.log('Before Loading');
-} 
-
 export const appConfig: ApplicationConfig = {
   providers: [
     {

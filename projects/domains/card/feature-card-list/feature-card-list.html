@@ -1,6 +1,6 @@
 <div class="basic-container">
     <ng-content />
-    <h1> Directive</h1>
+    <h1 aria-label="header"> Directive</h1>
     <label for="showSad"><input type="checkbox" id="showSad" checked (change)="showSad = !showSad"></label>
     <p>{{showSad}}</p>
     <select [(ngModel)]="hero">
