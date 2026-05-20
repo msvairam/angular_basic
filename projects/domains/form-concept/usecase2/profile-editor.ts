@@ -1,7 +1,7 @@
-import { Component, inject, ChangeDetectorRef } from '@angular/core';
+import { Component, inject, ChangeDetectorRef  } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule, Validators, FormBuilder, FormArray } from '@angular/forms';
-import { required, validate } from '@angular/forms/signals';
+import { MaskEmailPipe } from '../../../lib-common/pipe/mask-email';
 
 @Component({
     selector: 'app-profile-editor',
@@ -19,6 +19,8 @@ import { required, validate } from '@angular/forms/signals';
                 <p style="color:red">Email is Invalid</p>
              }
         }
+        <br />
+        Email: <p>{{profileForm.get('userEmail')?.value ?? ''| maskEmail:1}}</p>
         <div formGroupName='address'><br />
           <h2>Address</h2>
               <label for="street">Street: </label>
@@ -44,7 +46,7 @@ import { required, validate } from '@angular/forms/signals';
     <button id="clear" (click)="clear()">Clear</button>
 
     `,
-    imports: [ReactiveFormsModule],
+    imports: [ReactiveFormsModule, MaskEmailPipe],
 })
 export class ProfileEditor {
    /* protected readonly profileForm = new FormGroup({
