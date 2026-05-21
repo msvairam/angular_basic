@@ -10,9 +10,9 @@ import { FormControl, ReactiveFormsModule } from "@angular/forms";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NameEditor {
-    protected readonly name = new FormControl();
+    protected readonly name = new FormControl<string | null>(null); // Consider a control that is initialized to null
 
     protected updateValue() {
-        this.name.setValue('Vairamuthu');
+        this.name.setValue('Vairamuthu'); // Error.. Avoid <string | null>
     }
 }
