@@ -1,4 +1,4 @@
-import { Directive, input, signal, ElementRef, inject, model } from "@angular/core";
+import { Directive, input, ElementRef, inject, model, Renderer2 } from "@angular/core";
 
 @Directive({
     selector: '[appHighlight]',
@@ -10,6 +10,7 @@ import { Directive, input, signal, ElementRef, inject, model } from "@angular/co
 export class HightLightDirective {
 
     private readonly el = inject(ElementRef);
+    private readonly renderer = inject(Renderer2);
 
     public readonly appHighlight = input<string | null>('');
 
@@ -20,10 +21,14 @@ export class HightLightDirective {
 
    // protected readonly backgroundColor = signal<string | null>(null);
 
-    protected changeBackgroundColor(color: string | null) {
+    protected changeBackgroundColor1(color: string | null) {
         console.log(this.changeModel());
         this.el.nativeElement.style.backgroundColor = color;
        // this.el.nativeElement.style.color= color ?? 'red';
+    }
+
+    protected changeBackgroundColor(color: string | null): void {
+        this.renderer.setStyle(this.el.nativeElement,'backgroundColor', color);
     }
 
 
