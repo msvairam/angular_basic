@@ -1,59 +1,25 @@
-# MyApp
-
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.2.
-
-## Development server
-
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+5. After Angular 17, many new features were introduced. Can you explain them?
+Can you explain Signals in Angular?
+6. If you have two components, AComponent and BComponent, how would you use BComponent inside AComponent in Angular?
+7. How can we allow users to log in to the same application from a different portal outside the office network?
+8. What is your understanding of the DOM? Explain it with a real-time example, not theoretically.
+9. If your application supports login from multiple devices like mobile, tablet, desktop, and laptop, how would you identify which device the user is currently logged in from?
+10. What is the purpose of using ngOnInit() in Angular components?
+11. What can Reactive Forms do in a real-time application?
+12. How would you implement a dynamic form where input fields are shown or hidden based on the selected option, while also ensuring that newly added fields from the backend work automatically without changing the UI code?
+13. Why do we use services in Angular apart from API calls?
+14. How can you share data between Angular components?
+15. If you have multiple applications and want to share data between them, how would you design and implement the communication mechanism?
+16. If an admin updates profile data and the same changes need to be reflected in multiple users’ components simultaneously, how would you implement this in Angular?
+17. If an admin has full dashboard access, but different users have different levels of access to specific features, how would you implement role-based access control in Angular?
+18. Why do we need to install Node.js and npm before working with Angular?
+19. How does Change Detection work in Angular applications?
+20. Why do we use Observables in Angular applications?
+21. Why do we use Dependency Injection in Angular apart from injecting services?
+22. What is the difference between Subject, BehaviorSubject, and ReplaySubject in RxJS?
+23. Can you explain Angular Lifecycle Hooks?
+24. Can you explain Angular Guards?
+25. If an application has multiple components and different users with different permissions, how would you dynamically show or hide components based on the logged-in user?
+26. How can you restrict routes based on user in Angular?
+27. Can you write code for an HTTP interceptor to handle common error responses in Angular?
+28. Can you explain Server-Side Rendering (SSR) and Client-Side Rendering (CSR)?
