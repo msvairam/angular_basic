@@ -28,6 +28,10 @@ export const routes: Routes = [
         loadComponent: () => import('../../projects/domains/program-render/program-render').then((m => m.ProgramRender)),
         title: 'Program Render',
     },
+        {
+        path: 'signal_concept',
+        loadComponent: () => import('../../projects/domains/signal-concepts/signal-concepts').then(m => m.SignalConcepts),
+    },
     {
         path: 'home',
         loadComponent: () => import('../../projects/domains/home/view/view').then((m => m.Home)),
@@ -52,6 +56,7 @@ export const routes: Routes = [
         path: 'routing',
         loadChildren: () => import('../../projects/domains/routing/routing.route').then((m) => m.RoutingRoutes),
     },
+
     {
         path: '**',
         loadComponent: () => import('../../projects/domains/shared/no-found/no-found').then(m => m.NoFound),
