@@ -1,0 +1,56 @@
+<div class="dropdown-wrapper">
+  <div class="dropdown-trigger" (click)="toggleDropdown()">
+    @if(selectedItems.length === 0) {
+        <span>{{ placeholder() }}</span>
+    }
+    @if(selectedItems.length > 0) {
+        <span>{{ selectedItems.length  }} selected</span>   
+    }
+    <span class="arrow">{{ isOpen ? '▲' : '▼' }}</span>
+  </div>
+  @if(isOpen) {
+    <div class="dropdown-panel">
+      <input 
+        class="search-box"
+        placeholder="Search..."
+        [(ngModel)]="searchTerm"
+        (input)="filterOptions()"
+        autofocus 
+      />
+      <!-- Select All -->
+      <div 
+        class="option-item
+        select-all"
+        (click)="toggleSelectAll()"
+      >
+        <input 
+            type="checkbox" 
+            [checked]="isAllSelected()"
+            readonly
+          />
+        <label>Select All</label>
+      </div>
+
+      <div class="options-list">
+        @for(option of filteredOptions; track option.id) {
+          <div 
+            class="option-item"
+            (click)="toggleOption(option)"
+          >
+            <input 
+                type="checkbox"
+                [checked]="isSelected(option)"
+                readonly
+              >
+             <label>{{ option.label }}</label>
+          </div>
+        }
+          @if(filteredOptions.length === 0) {
+          <div class="no-results">
+            No options found
+          </div>
+         }
+      </div>
+    </div>
+  }
+</div>

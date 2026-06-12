@@ -20,9 +20,7 @@ export class Home {
         console.log(this.footer().message);
     
         setTimeout(() => {
-      
             this.message.update(val => val = 'Update Modern Application');
-    
         },5000);
     }
 }

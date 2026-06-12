@@ -28,7 +28,7 @@ export const routes: Routes = [
         loadComponent: () => import('../../projects/domains/program-render/program-render').then((m => m.ProgramRender)),
         title: 'Program Render',
     },
-        {
+    {
         path: 'signal_concept',
         loadComponent: () => import('../../projects/domains/signal-concepts/signal-concepts').then(m => m.SignalConcepts),
     },

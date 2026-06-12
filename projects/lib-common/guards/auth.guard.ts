@@ -1,8 +1,8 @@
 import { inject } from '@angular/core';
-import { CanActivateChildFn, Router } from "@angular/router";
+import { ActivatedRouteSnapshot, CanActivateChildFn, Router, RouterStateSnapshot } from "@angular/router";
 
 
-export const authGuard: CanActivateChildFn = (route, state) => {
+export const authGuard: CanActivateChildFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
     const router = inject(Router);
 
     const token =  localStorage.getItem('token');

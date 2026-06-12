@@ -14,7 +14,7 @@ export class PostData {
         return this.http.post<Post>('https://jsonplaceholder.typicode.com/posts', data);
     }
 
-    getPostByParams(params: { id: number}): Observable<Array<Post>> {
-        return this.http.get<Array<Post>>('https://jsonplaceholder.typicode.com/pots', { params, withCredentials: true, })
+    getPostByParams(params: { id: number}): Observable<Post[]> {
+        return this.http.get<Post[]>('https://jsonplaceholder.typicode.com/pots', { params, withCredentials: true, })
     }
 }

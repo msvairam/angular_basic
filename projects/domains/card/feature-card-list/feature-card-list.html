@@ -40,6 +40,11 @@
 <ng-template [nxUnless]="showSad">
     <p>No sad heroes available.</p>
 </ng-template>
+<app-multiple-select-dropdown
+    [options]="cities"
+    placeholder="Select Cities"
+    (selectionChange) = "OnSelectionChange($event)"
+></app-multiple-select-dropdown>
 <button (click)="resetSelectedCard()" >Reset Selected Card</button>
 <div class="main-container">
     @let _cardData = cardResource;
