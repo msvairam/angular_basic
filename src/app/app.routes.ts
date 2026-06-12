@@ -56,7 +56,10 @@ export const routes: Routes = [
         path: 'routing',
         loadChildren: () => import('../../projects/domains/routing/routing.route').then((m) => m.RoutingRoutes),
     },
-
+    {
+        path: 'todo-list',
+        loadComponent: () => import('../../projects/domains/todo-list/todo-list').then((m) => m.ToDoList),
+    },
     {
         path: '**',
         loadComponent: () => import('../../projects/domains/shared/no-found/no-found').then(m => m.NoFound),

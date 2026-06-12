@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, input, output, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output, OnInit, inject, ElementRef } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Option } from '../../lib-common/model/option';
 
@@ -8,9 +8,15 @@ import { Option } from '../../lib-common/model/option';
   imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './multiple-select-dropdown.html',
   styleUrl: './multiple-select-dropdown.css',
+  host: {
+    '(document:click)': 'onClickOutside($event)',
+  },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MulipleSelectDropdown implements OnInit {
+
+    private readonly el = inject(ElementRef);
+
     // Input Signal
     public readonly options = input.required<Option[]>();
     public readonly placeholder = input('Select Options');
@@ -68,6 +74,12 @@ export class MulipleSelectDropdown implements OnInit {
         if (this.isOpen) {
             this.searchTerm = '';
              this.filteredOptions = [...this.options()];
+        }
+    }
+
+    protected onClickOutside($event: Event) {
+        if (!this.el.nativeElement.contains($event.target)) {
+            this.isOpen = false;
         }
     }
 }

@@ -4,3 +4,10 @@ html, body {
   padding: 0;
   height: 100%;
 }
+
+.cdk-drag-preview {
+    padding: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 2);
+    border-radius: 4px;
+    background-color: rgb(221, 221, 234);
+}
