@@ -42,21 +42,27 @@
           <td colspan="4" class="loading">Loading...</td>
         </tr>
       }
+      @if(!productResource.isLoading && productResource.error()) {
+        <tr>
+            <td colspan="4" class="data-error">Failed to Load Data <button (click)='reload()'>Reload</button></td>
+        </tr>
+      }
     </tbody>
   </table>
   <!-- Pagination -->
   <div class="pagination">
-    <button (click)="goToPage(1)" [disabled]="currentPage() === 1">First</button>
-    <button (click)="prevPage()" [disabled]="currentPage() === 1">Prev</button>
+    @let _currentPage = currentPage();
+    <button (click)="goToPage(1)" [disabled]="_currentPage === 1">First</button>
+    <button (click)="prevPage()" [disabled]="_currentPage === 1">Prev</button>
 
     @for (page of visiblePages(); track $index) {
-      <button (click)="goToPage(page)" [class.active]="page === currentPage()">
+      <button (click)="goToPage(page)" [class.active]="page === _currentPage">
         {{ page }}
       </button>
     }
 
-    <button (click)="nextPage()" [disabled]="currentPage() === totalPages()">Next</button>
-    <button (click)="goToPage(totalPages())" [disabled]="currentPage() === totalPages()">
+    <button (click)="nextPage()" [disabled]="_currentPage === totalPages()">Next</button>
+    <button (click)="goToPage(totalPages())" [disabled]="_currentPage === totalPages()">
       Last
     </button>
   </div>

@@ -5,7 +5,6 @@ import {
   signal,
   computed,
   linkedSignal,
-  effect,
 } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -72,7 +71,7 @@ export class ProductList {
   });
 
   protected readonly totalPages = computed(() => {
-    return Math.ceil(this.totalProducts() / this.limit());
+    return Math.max(1, Math.ceil(this.totalProducts() / this.limit()));
   })
 
   // Linked signal
@@ -83,27 +82,25 @@ export class ProductList {
   });
 
   // functions
-  onFilterChange() {
+  protected onFilterChange() {
     this.skip.set(0);
   }
 
-  goToPage(page: number) {
+  protected goToPage(page: number) {
     if (page >= 1 && page <= this.totalPages()) {
       this.currentPage.set(page);
     }
   }
 
-  nextPage() {
+  protected nextPage() {
     this.goToPage(this.currentPage() + 1);
   }
 
-  prevPage() {
+  protected prevPage() {
     this.goToPage(this.currentPage() - 1);
   }
 
-  constructor() {
-    effect(() => {
-      console.log(this.visiblePages());
-    });
+  protected reload() {
+    this.productResource.reload();
   }
 }
