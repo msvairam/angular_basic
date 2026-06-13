@@ -61,6 +61,10 @@ export const routes: Routes = [
         loadComponent: () => import('../../projects/domains/todo-list/todo-list').then((m) => m.ToDoList),
     },
     {
+        path: 'product-list',
+        loadComponent: () => import('../../projects/domains/product-list/product-list').then((m) => m.ProductList),
+    },
+    {
         path: '**',
         loadComponent: () => import('../../projects/domains/shared/no-found/no-found').then(m => m.NoFound),
         title: '404 Error',

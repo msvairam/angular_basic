@@ -1,0 +1,63 @@
+<div class="container">
+  <!-- Filter -->
+  <div class="filter">
+    <input
+      type="text"
+      placeholder="search by title"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="onFilterChange()"
+    />
+    <select [(ngModel)]="limit">
+      <option [value]="10">10 / Page</option>
+      <option [value]="20">20 / Page</option>
+      <option [value]="30">30 / Page</option>
+    </select>
+  </div>
+  <!-- Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (product of products(); track product.id) {
+        <tr>
+          <td>{{ product.id }}</td>
+          <td>{{ product.title }}</td>
+          <td>{{ product.category }}</td>
+          <td>{{ product.price | currency }}</td>
+        </tr>
+      }
+      @if (!productResource.isLoading() && products().length === 0) {
+        <tr>
+          <td colspan="4" class="no-data">No results found</td>
+        </tr>
+      }
+      @if (productResource.isLoading()) {
+        <tr>
+          <td colspan="4" class="loading">Loading...</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+  <!-- Pagination -->
+  <div class="pagination">
+    <button (click)="goToPage(1)" [disabled]="currentPage() === 1">First</button>
+    <button (click)="prevPage()" [disabled]="currentPage() === 1">Prev</button>
+
+    @for (page of visiblePages(); track $index) {
+      <button (click)="goToPage(page)" [class.active]="page === currentPage()">
+        {{ page }}
+      </button>
+    }
+
+    <button (click)="nextPage()" [disabled]="currentPage() === totalPages()">Next</button>
+    <button (click)="goToPage(totalPages())" [disabled]="currentPage() === totalPages()">
+      Last
+    </button>
+  </div>
+</div>
