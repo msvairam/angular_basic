@@ -9,7 +9,7 @@ import {
 import { CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { rxResource, takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { catchError, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 
 import { ProductData } from './data/product-data';
@@ -41,7 +41,10 @@ export class ProductList {
       };
     },
     stream: ({ params: { ...queryParams } }) => {
-      return this.productData.getProducts(queryParams);
+      return this.productData.getProducts(queryParams)
+        .pipe(catchError((err) => {
+            throw new Error(err);
+        }));
     },
   });
 
@@ -49,7 +52,7 @@ export class ProductList {
   protected readonly products = computed(() => this.productResource.value()?.products ?? []);
   protected readonly totalProducts = computed(() => this.productResource.value()?.total ?? 0);
 
-  protected readonly debounceSearchTerm  =  toSignal(
+  protected readonly debounceSearchTerm = toSignal(
         toObservable(this.searchTerm)
             .pipe(
                 debounceTime(500),

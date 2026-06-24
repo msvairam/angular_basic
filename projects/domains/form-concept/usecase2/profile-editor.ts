@@ -1,7 +1,12 @@
 import { Component, inject, ChangeDetectorRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ReactiveFormsModule, Validators, FormBuilder, FormArray } from '@angular/forms';
+import { ReactiveFormsModule, Validators, FormBuilder, FormArray, AbstractControl, ValidationErrors } from '@angular/forms';
 import { MaskEmailPipe } from '../../../lib-common/pipe/mask-email';
+
+export function noSpaceValidator(control: AbstractControl): ValidationErrors | null {
+    return /\s/.test(control.value) ? { noSpace: true } : null;
+}
+
 
 @Component({
   selector: 'app-profile-editor',
@@ -75,7 +80,7 @@ export class ProfileEditor {
     */
 
   protected readonly profileForm = this.formBuilder.nonNullable.group({
-    firstName: ['', [Validators.required, Validators.pattern('^[A-Za-z]*$')]],
+    firstName: ['', [Validators.required, Validators.pattern('^[A-Za-z]*$'), noSpaceValidator]],
     lastName: [''],
     userEmail: ['', [Validators.required, Validators.email]],
     address: this.formBuilder.nonNullable.group({
