@@ -65,6 +65,10 @@ export const routes: Routes = [
         loadComponent: () => import('../../projects/domains/product-list/product-list').then((m) => m.ProductList),
     },
     {
+        path: 'task-board',
+        loadComponent: () => import('../../projects/domains/task-board/task-board').then((m) => m.TaskBoard),
+    },
+    {
         path: '**',
         loadComponent: () => import('../../projects/domains/shared/no-found/no-found').then(m => m.NoFound),
         title: '404 Error',
