@@ -8,13 +8,14 @@ import { GridRow } from './grid-row';
     selector: 'app-character-gird',
     imports: [GridRow, ScrollingModule],
     template: `
-        @if(rows().length > 0) {
+        @let _rows = rows();
+        @if(_rows.length > 0) {
             <div class="grid-shell">
                 <cdk-virtual-scroll-viewport [itemSize]="20" class="viewport"
                     (scrolledIndexChange)="onScrollIndex($event)"
                 >
                     <div class="grid-items">
-                        <app-grid-row *cdkVirtualFor="let row of rows();" [character]="row" />
+                        <app-grid-row *cdkVirtualFor="let row of _rows;" [character]="row" />
                     </div>
                 </cdk-virtual-scroll-viewport>
             </div>
@@ -27,7 +28,7 @@ import { GridRow } from './grid-row';
     }
 
     .grid-shell {
-        height: 100dvh;
+        height: 100%;
         padding: 16px;
         box-sizing: border-box;
         overflow: hidden;
@@ -37,6 +38,7 @@ import { GridRow } from './grid-row';
         height: 100%;
         width: 100%;
         overflow-y: auto;
+        overflow-x: hidden;
         border: 1px solid #e2e8f0;
         border-radius: 12px;
         background: #f8fafc;
@@ -58,6 +60,7 @@ export class CharacterGrid {
     protected totalPages = computed(() => this.cd.totalPages());
     protected isAtEnd = false;
     private wasAtEnd = false;
+    private hasScrolled = false;
 
     onScrollIndex($event: number) {
         const viewport = this.viewport;
@@ -65,14 +68,23 @@ export class CharacterGrid {
             return;
         }
 
+        const topOffset = viewport.measureScrollOffset('top');
         const totalItems = viewport.getDataLength();
         const bottomOffset = viewport.measureScrollOffset('bottom');
+
+        if (!this.hasScrolled && topOffset === 0) {
+            return;
+        }
+
+        this.hasScrolled = true;
+
         const nearBottom = totalItems > 0 && bottomOffset <= 13;
 
         if (nearBottom && !this.wasAtEnd) {
             this.wasAtEnd = true;
             this.isAtEnd = true;
-            console.log('reached end');
+            this.cd.page.update(val => val + 1);
+            console.log('reached end >>>');
         } else if (!nearBottom) {
             this.wasAtEnd = false;
             this.isAtEnd = false;
