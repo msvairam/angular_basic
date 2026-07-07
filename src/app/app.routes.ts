@@ -73,6 +73,10 @@ export const routes: Routes = [
         loadComponent: () => import('../../projects/domains/character-grid/character-grid').then((m) => m.CharacterGrid)
     },
     {
+        path: 'receipe',
+        loadComponent: () => import('../../projects/domains/receipe-search/receipe-search').then(m => m.ReceipeSearch),
+    },
+    {
         path: '**',
         loadComponent: () => import('../../projects/domains/shared/no-found/no-found').then(m => m.NoFound),
         title: '404 Error',

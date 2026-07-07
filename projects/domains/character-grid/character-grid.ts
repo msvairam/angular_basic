@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, inject, computed, effect, ViewChild } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, computed, effect, viewChild } from '@angular/core';
 import { CdkVirtualScrollViewport, ScrollingModule } from '@angular/cdk/scrolling'
 
 import { GridState } from './grid-state';
@@ -55,7 +55,7 @@ import { GridRow } from './grid-row';
 })
 export class CharacterGrid {
     private readonly cd = inject(GridState);
-    @ViewChild(CdkVirtualScrollViewport) private viewport?: CdkVirtualScrollViewport;
+    private readonly viewport = viewChild.required(CdkVirtualScrollViewport);
 
     protected totalPages = computed(() => this.cd.totalPages());
     protected isAtEnd = false;
@@ -68,9 +68,9 @@ export class CharacterGrid {
             return;
         }
 
-        const topOffset = viewport.measureScrollOffset('top');
-        const totalItems = viewport.getDataLength();
-        const bottomOffset = viewport.measureScrollOffset('bottom');
+        const topOffset = viewport().measureScrollOffset('top');
+        const totalItems = viewport().getDataLength();
+        const bottomOffset = viewport().measureScrollOffset('bottom');
 
         if (!this.hasScrolled && topOffset === 0) {
             return;
