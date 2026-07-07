@@ -1,9 +1,11 @@
 import { Component, ChangeDetectionStrategy, signal, inject, computed } from '@angular/core';
 import { rxResource, toSignal, toObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, shareReplay } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 
 import { SearchBox } from '../../lib-view/search-box/search-box';
 import { ReceipeSearchData } from './receipe-search-data';
+import { ReceipeResponse } from './receipe-search.model';
 
 @Component({
     selector: 'app-receipe-search',
@@ -18,6 +20,7 @@ export class ReceipeSearch {
 
     protected searchLabel = 'AutoComplete Receipe Search';
     protected searchTerm = signal('');
+    private cachedReceipe = new Map<string, Observable<ReceipeResponse>>();
 
    private debounceSearchTerm = toSignal(
         toObservable(this.searchTerm).pipe(
@@ -39,7 +42,13 @@ export class ReceipeSearch {
             return { searchTerm };
         },
         stream: ({params: { searchTerm }}) => {
-            return this.receipeData.getReceipe(searchTerm);
+            if(!this.cachedReceipe.get(searchTerm)) {
+                const request$ = this.receipeData.getReceipe(searchTerm).pipe(
+                    shareReplay({bufferSize: 1, refCount : true })
+                );
+                this.cachedReceipe.set(searchTerm, request$);
+            }
+            return this.cachedReceipe.get(searchTerm) ?? of({recipes: []});
         }
     },
 );
