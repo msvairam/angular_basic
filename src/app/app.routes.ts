@@ -77,6 +77,10 @@ export const routes: Routes = [
         loadComponent: () => import('../../projects/domains/receipe-search/receipe-search').then(m => m.ReceipeSearch),
     },
     {
+        path: 'user-form',
+        loadComponent: () => import('../../projects/domains/user-form/user-form').then(m => m.UserForm),
+    },
+    {
         path: '**',
         loadComponent: () => import('../../projects/domains/shared/no-found/no-found').then(m => m.NoFound),
         title: '404 Error',

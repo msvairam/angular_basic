@@ -11,3 +11,23 @@ html, body {
     border-radius: 4px;
     background-color: rgb(221, 221, 234);
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  
+  .field {
+      display: flex;
+      flex-direction: row;
+      gap:10px;
+      width:264px;
+      align-items: center;
+
+      input, select {
+        width: 150px;
+        height: 25px;
+      }
+  }
+}
