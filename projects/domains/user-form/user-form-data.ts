@@ -51,6 +51,4 @@ export class userFormData {
     apply(path.interest, this.interestSchema);
     apply(path.settings, this.settingsSchema);
   });
-
-  public isProfileValid = computed(() => this.userForm.profile().valid());
 }

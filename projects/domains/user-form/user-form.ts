@@ -22,21 +22,21 @@ export class UserForm {
         name: 'profile',
         label: 'Profile',
         component: () => import('./profile/profile').then(m => m.Profile),
-        status: computed(() => this.ufd.userForm.profile().valid())
+        status: computed(() => this.ufd.userForm.profile().valid()),
     },
     {
         id: 2,
         name: 'interest',
         label: 'Interest',
         component: () => import('./interest/interest').then(m => m.Interest),
-         status: computed(() => this.ufd.userForm.interest().valid())
+         status: computed(() => this.ufd.userForm.interest().valid()),
     },
      {
         id: 3,
         name: 'settings',
-        label: 'settings',
+        label: 'Settings',
         component: () => import('./settings/settings').then(m => m.Settings),
-        status: computed(() => this.ufd.userForm.settings().valid())
+        status: computed(() => this.ufd.userForm.settings().valid()),
     },
 ]);
 
