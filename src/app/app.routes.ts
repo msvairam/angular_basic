@@ -81,6 +81,10 @@ export const routes: Routes = [
         loadComponent: () => import('../../projects/domains/user-form/user-form').then(m => m.UserForm),
     },
     {
+        path: 'opt-verification',
+        loadComponent: () => import('../../projects/domains/opt-verification/opt-verification').then(m => m.OPTVerification)
+    },
+    {
         path: '**',
         loadComponent: () => import('../../projects/domains/shared/no-found/no-found').then(m => m.NoFound),
         title: '404 Error',
