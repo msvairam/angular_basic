@@ -1,8 +1,9 @@
 <div class="main-container">
     <div class="header">
-        <p>CCard Active: {{ cardActive() }}</p>
+        <p>CCard Active: {{ cardActive() }}</p><button (click)="showNotifiction()">Show Notification</button>
     </div>
     <div class="body-container">
         <router-outlet />
     </div>
+    <app-toast></app-toast>
 </div>

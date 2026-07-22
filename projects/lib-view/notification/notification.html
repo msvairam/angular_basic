@@ -1,0 +1,22 @@
+@let _params = params();
+<div class="notification-container">
+    <div class="main-container">
+        <div class="notification-content">
+            <div class="notification-item">
+                <div class="notification-type">
+                    <p>{{_params.type}}</p>
+                </div>
+                <div class="notification-message">
+                    <span>{{_params.title}}</span>
+                    <span>{{_params.description}}</span>
+                </div>
+            </div>
+            <div class="notification-action">
+                <button>Join</button>
+            </div>
+        </div>
+    
+        <button class="close" (click)="removeNotification()">X</button>
+    </div>
+      <div class="notification-progress"></div>
+</div>
