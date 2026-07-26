@@ -1,6 +1,7 @@
 <div class="main-container">
     <div class="header">
         <p>CCard Active: {{ cardActive() }}</p><button (click)="showNotifiction()">Show Notification</button>
+        <p>Notifications: {{_count()}}</p>
     </div>
     <div class="body-container">
         <router-outlet />

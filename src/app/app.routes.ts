@@ -83,6 +83,10 @@ export const routes: Routes = [
     {
         path: 'opt-verification',
         loadComponent: () => import('../../projects/domains/opt-verification/opt-verification').then(m => m.OPTVerification)
+    },  
+    {
+        path: 'country-list',
+        loadComponent: () => import('../../projects/domains/country-list/country-list').then(m => m.CountryList),
     },
     {
         path: '**',
