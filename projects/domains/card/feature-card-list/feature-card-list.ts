@@ -97,6 +97,34 @@ export class FeatureCardList {
     this.selectedCard.update((val) => (val = 0));
   }
 
+  protected async exectute() {
+    await navigator.locks.request(
+      'lock_call', 
+      { 
+        // mode: 'exclusive' // // only one tab executes this at a time
+        mode: 'shared', // multiple tabs can be in here at the same time
+      //  ifAvailable: true, // don't queue — return immediately (null callback) if lock is already held  
+      }, 
+      async () => {
+      console.log('lock');
+             const val = await new Promise((resolve, _) => {
+              setTimeout(() => {
+                resolve(200);
+              },10000)
+            });
+            console.log(val); 
+    });
+
+    /*
+    "A Web Lock only ensures that one tab executes the critical section at a time; 
+    it doesn't automatically prevent duplicate work. After acquiring the lock,
+     I always recheck whether the token still requires refreshing because another 
+     tab may have already completed the refresh while this tab was waiting.
+      If the token is already valid, I exit without making another API call.
+       I also broadcast the refreshed token to other tabs so they update their 
+       local state immediately." */
+  }
+
 
 
     constructor() {
