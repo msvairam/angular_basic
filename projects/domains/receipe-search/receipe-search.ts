@@ -6,6 +6,7 @@ import { Observable, of } from 'rxjs';
 import { SearchBox } from '../../lib-view/search-box/search-box';
 import { ReceipeSearchData } from './receipe-search-data';
 import { ReceipeResponse } from './receipe-search.model';
+import { LOGGER_FORMATTER } from '../../lib-common/utils-logger/logger-formatter';
 
 @Component({
     selector: 'app-receipe-search',
@@ -17,6 +18,7 @@ import { ReceipeResponse } from './receipe-search.model';
 export class ReceipeSearch {
 
     private receipeData = inject(ReceipeSearchData);
+    private loggerFormatter = inject(LOGGER_FORMATTER);
 
     protected searchLabel = 'AutoComplete Receipe Search';
     protected searchTerm = signal('');
@@ -39,6 +41,7 @@ export class ReceipeSearch {
     private readonly receipeResource = rxResource({
         params: () => {
             const searchTerm = this.debounceSearchTerm();
+            this.loggerFormatter.format(searchTerm);
             return { searchTerm };
         },
         stream: ({params: { searchTerm }}) => {
